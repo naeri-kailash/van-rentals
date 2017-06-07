@@ -5,7 +5,7 @@ var environment = process.env.NODE_ENV || 'development'
 var config = require('./knexfile')[environment]
 var knex = require('knex')(config)
 
-var users = require('./routes/users')
+var rentals = require('./routes/rentals')
 
 var server = express()
 
@@ -16,5 +16,4 @@ module.exports = server
 server.use(bodyParser.json())
 
 // Routes
-server.use('/users', users)
-
+server.use('/rentals', rentals)

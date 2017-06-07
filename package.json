@@ -1,7 +1,7 @@
 {
   "name": "boilerplate-knex",
   "version": "0.1.2",
-  "description": "Express boilerplate with Knex.js",
+  "description": "Van Rental Service",
   "main": "index.js",
   "scripts": {
     "knex": "knex",
@@ -12,18 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dev-academy-challenges/boilerplate-knex.git"
+    "url": "git+https://github.com/naeri-kailash/van-rental-service.git"
   },
-  "keywords": [
-    "eda",
-    "boilerplate"
-  ],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dev-academy-challenges/boilerplate-knex/issues"
+    "url": "https://github.com/naeri-kailash/van-rental-service/issues"
   },
-  "homepage": "https://github.com/dev-academy-challenges/boilerplate-knex#readme",
+  "homepage": "https://github.com/naeri-kailash/van-rental-service#readme",
   "devDependencies": {
     "ava": "^0.18.0",
     "nodemon": "^1.11.0",
