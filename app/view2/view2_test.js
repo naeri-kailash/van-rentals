@@ -8,8 +8,8 @@ describe('myApp.view2 module', function() {
 
     it('should ....', inject(function($controller) {
       //spec body
-      var view2Ctrl = $controller('View2Ctrl');
-      expect(view2Ctrl).toBeDefined();
+      var SaveRental = $controller('SaveRental');
+      expect(SaveRental).toBeDefined();
     }));
 
   });

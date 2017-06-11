@@ -7,6 +7,7 @@ exports.up = knex => knex.schema.createTable('rentals', table => {
   table.integer('phone_number')
   table.string('address_1')
   table.string('address_2')
+  table.boolean('driver_needed').notNullable().defaultTo('true')
   table.dateTime('start_rental')
   table.dateTime('end_rental')
 })
