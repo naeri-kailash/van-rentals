@@ -1,16 +1,18 @@
-<!-- <p>This is the partial for view 2.</p>
+<html ng-app="myApp">
+
+<p>This is the partial for view 2.</p>
 <p>
   Showing of 'interpolate' filter:
   {{ 'Current version is v%VERSION%.' | interpolate }}
-</p> -->
+</p>
 
 
 <!-- <div ng-include="../../components/navbar/navbar.html"></div> -->
   <!-- <link rel="stylesheet" href="./rental.css"> -->
-<header class="hero-unit" id="banner">
+<header>
   <div class="container">
     <h1>Van Rental Service</h1>
-    <p class="lead">Moving house? We have the know-how and can-do!</p>
+    <p>Moving house? We have the know-how and can-do!</p>
     <button>Book Now</button>
   </div>
 </header>
@@ -27,7 +29,18 @@
       <h1 class="page-header">Your Details</h1>
 <!-- form -->
 
-      <div >
+      <div ng-controller="View2Ctrl">
+
+        <input type="text" ng-model="fname" /><br />
+        <input type="text" ng-model="lname" /><br />
+
+        <button ng-click="updateName()">Name</button>
+
+        <button ng-click="callNotify()">SUBMIT</button>
+        <p>
+          Hello {{fullname}}
+        </p>
+
         <form novalidate class="css-form">
           <label>First Name: <input type="text" ng-model="user.fname" /></label><br />
           <label>Last Name: <input type="text" ng-model="user.lname" /></label><br />
@@ -69,3 +82,4 @@
       </p>
   </div>
 </footer>
+</html>
