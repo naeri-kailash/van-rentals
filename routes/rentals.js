@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 })
 
 router.post('/save', (req, res) => {
-  rentals.saveRental(req.body.first_name, req.body.last_name, req.body.email, req.body.driver_needed, req.body.phone_number, req.body.address_1, req.body.address_2, req.body.start_rental, req.body.end_rental)
+  rentals.saveRental(req.body.first_name, req.body.last_name, req.body.email, req.body.driver_needed, req.body.phone_number, req.body.address_1, req.body.address_2, req.body.rental_date, req.body.start_rental, req.body.end_rental)
       .then(result => console.log(req.body))
       .then(() => rentals.getRentals())
       .then(function (result) {

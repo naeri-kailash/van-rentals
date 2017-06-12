@@ -8,8 +8,9 @@ exports.up = knex => knex.schema.createTable('rentals', table => {
   table.string('address_1')
   table.string('address_2')
   table.boolean('driver_needed').notNullable().defaultTo('true')
-  table.dateTime('start_rental')
-  table.dateTime('end_rental')
+  table.date('rental_date').notNullable()
+  table.time('start_rental').notNullable()
+  table.time('end_rental').notNullable()
 })
 
 exports.down = knex => knex.schema.dropTable('rentals')
