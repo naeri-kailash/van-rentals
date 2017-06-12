@@ -1,0 +1,24 @@
+.service-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.our-story {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.book-now {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.list {
+  list-style-type: none;
+  padding: 5px;
+}
+
+.story-para {
+  padding-left: 20px;
+  padding-right: 20px;
+}
