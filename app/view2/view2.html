@@ -6,14 +6,39 @@
         <div ng-controller="SaveRental">
           <form novalidate class="css-form">
 
-            <h1>Pick a day and time</h1>
+            <h1>Pick a date and time</h1>
             <label>Hire date: <input type="date" id="hiredate" name="hiredate" ng-model="user.rental_date" /></label><br />
-            <label>Start hire: <input type="time" id="hirestart" name="hirestart" ng-model="user.start_rental" /></label><br />
-            <label>End hire: <input type="time" id="hireend" name="hireend" ng-model="user.end_rental" /></label><br />
-
-            Do you require a driver?
-            <label><input type="radio" id="no-driver" name="no-driver" ng-model="user.driver_needed" value="true" />Yes</label>
-            <label><input type="radio" id="driver" name="driver" ng-model="user.driver_needed" value="false" />No</label><br />
+            <label>Start hire:
+              <select id="hirestart" name="hirestart" ng-model="user.start_rental">
+                <option value="10:00">10:00</option>
+                <option value="11:00">11:00</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
+                <option value="15:00">15:00</option>
+                <option value="16:00">16:00</option>
+                <option value="17:00">17:00</option>
+                <option value="18:00">18:00</option>
+                <option value="19:00">19:00</option>
+                <option value="20:00">20:00</option>
+                <option value="21:00">21:00</option>
+              </select></label>
+            <label>End hire:
+              <select id="hireend" name="hireend" ng-model="user.end_rental">
+                <option value="10:00">10:00</option>
+                <option value="11:00">11:00</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
+                <option value="15:00">15:00</option>
+                <option value="16:00">16:00</option>
+                <option value="17:00">17:00</option>
+                <option value="18:00">18:00</option>
+                <option value="19:00">19:00</option>
+                <option value="20:00">20:00</option>
+                <option value="21:00">21:00</option>
+                <option value="22:00">22:00</option>
+              </select></label><br />
 
             <h1>Your Details</h1>
             <label>First Name: <input type="text" id="fname" name="fname" ng-model="user.first_name" placeholder="first name"/></label><br />
