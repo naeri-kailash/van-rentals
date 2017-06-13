@@ -7,7 +7,7 @@ exports.up = knex => knex.schema.createTable('rentals', table => {
   table.integer('phone_number')
   table.string('address_1')
   table.string('address_2')
-  table.date('rental_date').notNullable()
+  table.string('rental_date').notNullable()
   table.integer('start_rental').notNullable()
   table.integer('end_rental').notNullable()
 })

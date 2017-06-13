@@ -1,3 +1,13 @@
 .submit-error {
   color: red;
 }
+.centre-img {
+  text-align: center;
+}
+.form-style {
+  margin-left: 50px;
+}
+.heading {
+  margin-bottom: 40px;
+  margin-top: 40px;
+}
