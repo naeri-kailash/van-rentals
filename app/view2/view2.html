@@ -1,15 +1,21 @@
-<html ng-app="myApp">
 
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
         <div ng-controller="SaveRental">
-          <form novalidate class="css-form">
+          <form name="form" novalidate class="css-form">
 
             <h1>Pick a date and time</h1>
             <label>Hire date: <input type="date" id="hiredate" name="hiredate" ng-model="user.rental_date" /></label><br />
+            <button ng-click="checkAvailability(user.rental_date)" required="">Check Date</button><br />
+            <div ng-show="dateTaken">
+               <div class="submit-error">'Date not available'</div>
+             </div>
+<p>
+  {{timesTaken}} {{booked}}
+</p>
             <label>Start hire:
-              <select id="hirestart" name="hirestart" ng-model="user.start_rental">
+              <select id="hirestart" name="hirestart" ng-model="user.start_rental" required="">
                 <option value="10:00">10:00</option>
                 <option value="11:00">11:00</option>
                 <option value="12:00">12:00</option>
@@ -21,12 +27,11 @@
                 <option value="18:00">18:00</option>
                 <option value="19:00">19:00</option>
                 <option value="20:00">20:00</option>
-                <option value="21:00">21:00</option>
-              </select></label>
+              </select>
+            </label>
+
             <label>End hire:
-              <select id="hireend" name="hireend" ng-model="user.end_rental">
-                <option value="10:00">10:00</option>
-                <option value="11:00">11:00</option>
+              <select id="hireend" name="hireend" ng-model="user.end_rental" required="">
                 <option value="12:00">12:00</option>
                 <option value="13:00">13:00</option>
                 <option value="14:00">14:00</option>
@@ -38,15 +43,41 @@
                 <option value="20:00">20:00</option>
                 <option value="21:00">21:00</option>
                 <option value="22:00">22:00</option>
-              </select></label><br />
+              </select>
+            </label><br />
 
             <h1>Your Details</h1>
-            <label>First Name: <input type="text" id="fname" name="fname" ng-model="user.first_name" placeholder="first name"/></label><br />
-            <label>Last Name: <input type="text" id="lname" name="lname" ng-model="user.last_name" placeholder="last name"/></label><br />
-            <label>E-mail: <input type="email" id="email" name="email" ng-model="user.email" placeholder="email"/></label><br />
-            <label>Contact number: <input type="text" id="phone" name="phone" ng-model="user.phone_number" placeholder="021..."/></label><br />
-            <label>Start Address: <input type="text" id="address1" name="address1" ng-model="user.address_1" placeholder="rental start address"/></label><br />
-            <label>End Address: <input type="text" id="address2" name="address2" ng-model="user.address_2" placeholder="rental end address"/></label><br />
+            <label>First Name: <input type="text" id="fname" name="fname" ng-model="user.first_name" placeholder="first name" required=""/></label><br />
+            <div ng-show="form.$submitted || form.fname.$touched">
+               <div class="submit-error" ng-show="form.fname.$error.required">Enter your first name.</div>
+             </div>
+
+            <label>Last Name: <input type="text" id="lname" name="lname" ng-model="user.last_name" placeholder="last name" required=""/></label><br />
+            <div ng-show="form.$submitted || form.lname.$touched">
+               <div class="submit-error" ng-show="form.lname.$error.required">Enter your last name.</div>
+             </div>
+
+            <label>E-mail: <input type="email" id="email" name="email" ng-model="user.email" placeholder="email" required=""/></label><br />
+            <div ng-show="form.$submitted || form.email.$touched">
+               <div class="submit-error" ng-show="form.email.$error.required">Enter an email.</div>
+               <div ng-show="form.email.$error.email">This is not a valid email.</div>
+             </div>
+
+            <label>Contact number: <input type="text" id="phone" name="phone" ng-model="user.phone_number" placeholder="021..." required=""/></label><br />
+            <div ng-show="form.$submitted || form.phone.$touched">
+               <div class="submit-error" ng-show="form.phone.$error.required">Enter a phone number.</div>
+             </div>
+
+            <label>Start Address: <input type="text" id="address1" name="address1" ng-model="user.address_1" placeholder="rental start address" required=""/></label><br />
+            <div ng-show="form.$submitted || form.address1.$touched">
+               <div class="submit-error" ng-show="form.address1.$error.required">Enter a start address.</div>
+             </div>
+
+            <label>End Address: <input type="text" id="address2" name="address2" ng-model="user.address_2" placeholder="rental end address" required=""/></label><br />
+            <div ng-show="form.$submitted || form.address2.$touched">
+               <div class="submit-error" ng-show="form.address2.$error.required">Enter an end address.</div>
+             </div>
+
           <input type="submit" ng-click="saveRental(user)" value="Submit" />
           </form>
           <pre>user = {{user | json}}</pre>

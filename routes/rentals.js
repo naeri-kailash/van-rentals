@@ -19,6 +19,18 @@ router.get('/', (req, res) => {
   })
 })
 
+router.get('/:rental_date', (req, res) =>  {
+  rentals.checkDate(req.body.rental_date)
+  .then(function(result) {
+    res.send(result)
+  })
+  .catch((err) => {
+    if (err) {
+      console.error(err.message)
+    }
+  })
+})
+
 router.post('/save', (req, res) => {
   rentals.saveRental(req.body.first_name, req.body.last_name, req.body.email, req.body.phone_number, req.body.address_1, req.body.address_2, req.body.rental_date, req.body.start_rental, req.body.end_rental)
       .then(result => console.log(req.body))
