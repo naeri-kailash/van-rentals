@@ -5,17 +5,17 @@
 var test = require('ava')
 var request = require('supertest')
 
-var app = require('../../server')
+var app = require('../../routes')
 var setupDb = require('../setup-db')
 
 setupDb(test, function (db) {
   app.set('knex', db)
 })
 
-test.cb('getUsers gets all users', function (t) {
-  var expected = 26
+test.cb('getRentals gets all rentals', function (t) {
+  var expected = 10
   request(app)
-    .get('/users')
+    .get('/rentals')
     .expect('Content-Type', /json/)
     .expect(200)
     .end(function (err, res) {
@@ -24,4 +24,3 @@ test.cb('getUsers gets all users', function (t) {
       t.end()
     })
 })
-

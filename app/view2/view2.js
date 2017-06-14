@@ -24,6 +24,11 @@ view2.controller('SaveRental', ['$scope', '$http', function ($scope, $http) {
   //---Save new rental to database
   $scope.saveRental = function (user) {
       $http.post('/rentals/save', user);
+      $scope.user = {};
+      $scope.dateTaken = false;
+      $scope.bookedHrs = '';
+      $scope.cannotSubmit = true;
+      $scope.canSubmit = false;
   };
 
 
@@ -85,6 +90,6 @@ view2.controller('SaveRental', ['$scope', '$http', function ($scope, $http) {
       $scope.timeErr = false;
       $scope.cannotSubmit = false;
       $scope.canSubmit = true;
-    } 
+    }
   }
 }]);

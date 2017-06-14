@@ -98,7 +98,7 @@
             <div ng-show="cannotSubmit">
               Complete form to submit
             </div>
-            <input ng-show="canSubmit" type="submit" ng-disabled="myForm.$invalid" ng-click="saveRental(user)" value="Submit" />
+            <input ng-show="canSubmit" onsubmit="window.location.reload()" type="submit" ng-disabled="myForm.$invalid" ng-click="saveRental(user)" value="Submit" />
           </form>
         </div>
       </div>
