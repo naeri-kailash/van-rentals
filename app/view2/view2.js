@@ -15,6 +15,7 @@ view2.controller('SaveRental', ['$scope', '$http', function ($scope, $http) {
   $scope.bookedHrs = '';
   $scope.cannotSubmit = true;
   document.getElementById("no-submit").setAttribute('disabled','disabled')
+
   //---GET all rentals from database
   $http.get('/rentals').success(function (data) {
     $scope.rentals = data;
@@ -61,15 +62,13 @@ view2.controller('SaveRental', ['$scope', '$http', function ($scope, $http) {
     };
   };
 
-
+  //---check times don't conflict
   $scope.checkSubmit = function (startRental, endRental) {
     $scope.timeErr = false;
     $scope.cannotSubmit = true;
     let booked = $scope.booked
     if (booked.length > 0) {
       for (var i = 0; i < booked.length; i++) {
-        console.log('type', typeof startRental)
-        console.log('type2', typeof endRental)
         let bookedStart = booked[i].start_rental.slice(0, 2);
         let bookedEnd = booked[i].end_rental.slice(0, 2);
         let userStart = startRental.slice(0, 2);
