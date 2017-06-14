@@ -40,7 +40,7 @@
 
             <h1 class="heading">Pick a date and time</h1>
             <label>Hire date: <input type="date" id="hiredate" name="hiredate" ng-model="user.rental_date" /></label><br />
-            <button ng-click="checkAvailability(user.rental_date)" name="checkdate"required="">Check Date</button><br />
+            <button type="button" ng-click="checkAvailability(user.rental_date)" name="checkdate"required="">Check Date</button><br />
             <div ng-show="dateTaken">
                <div class="submit-error">Van has bookings on this day.</div>
             </div>
@@ -58,24 +58,25 @@
 
             {{booked}}
 
-            <label>Start hire:
-              <select id="hirestart" name="hirestart" ng-model="user.start_rental" required="">
-                <option value="10:00">10:00</option>
-                <option value="11:00">11:00</option>
-                <option value="12:00">12:00</option>
-                <option value="13:00">13:00</option>
-                <option value="14:00">14:00</option>
-                <option value="15:00">15:00</option>
-                <option value="16:00">16:00</option>
-                <option value="17:00">17:00</option>
-                <option value="18:00">18:00</option>
-                <option value="19:00">19:00</option>
-                <option value="20:00">20:00</option>
-              </select>
-            </label>
-
+            <div>
+              <label check-start-time startTime="user.start_rental">Start hire:
+                <select id="hirestart" name="hirestart" ng-model="user.start_rental" required="">
+                  <option value="10:00">10:00</option>
+                  <option value="11:00">11:00</option>
+                  <option value="12:00">12:00</option>
+                  <option value="13:00">13:00</option>
+                  <option value="14:00">14:00</option>
+                  <option value="15:00">15:00</option>
+                  <option value="16:00">16:00</option>
+                  <option value="17:00">17:00</option>
+                  <option value="18:00">18:00</option>
+                  <option value="19:00">19:00</option>
+                  <option value="20:00">20:00</option>
+                </select>
+              </label>
+            </div>
             <label>End hire:
-              <select id="hireend" name="hireend" ng-click="checkSubmit()" ng-model="user.end_rental" required="">
+              <select id="hireend" name="hireend" ng-click="checkSubmit()" ng-model="user.end_rental" endTime="user.end_rental" required="">
                 <option value="12:00">12:00</option>
                 <option value="13:00">13:00</option>
                 <option value="14:00">14:00</option>
@@ -91,7 +92,11 @@
             </label><br />
             <span style="color:red" ng-show="timeErr">This time coincides with an existing booking. Please change your time selection.</span>
 
-          <input type="submit" ng-disabled="myForm.$invalid" ng-click="saveRental(user)" value="Submit" />
+            <input type="button" value="Submit" />
+            <div ng-show="cannotSubmit">
+              Complete form to submit
+            </div>
+            <input ng-show="canSubmit" type="submit" ng-disabled="myForm.$invalid" ng-click="saveRental(user)" value="Submit" />
           </form>
         </div>
 

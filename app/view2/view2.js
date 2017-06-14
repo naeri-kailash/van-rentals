@@ -2,34 +2,34 @@
 
 var view2 = angular.module('myApp.view2', ['ngRoute'])
 
-.config(['$routeProvider', function($routeProvider) {
+.config(['$routeProvider', function ($routeProvider) {
   $routeProvider.when('/view2', {
     templateUrl: 'view2/view2.html',
     controller: 'SaveRental',
-    directive: 'TimeSelect'
+    directive: 'checkStartTime'
   });
 }]);
 
-view2.controller('SaveRental', ['$scope', '$http', function($scope, $http) {
+view2.controller('SaveRental', ['$scope', '$http', function ($scope, $http) {
   $scope.user = {};
   $scope.dateTaken = false;
   $scope.bookedHrs = '';
 
 
   //---GET all rentals from database
-  $http.get('/rentals').success(function(data) {
+  $http.get('/rentals').success(function (data) {
     $scope.rentals = data;
   });
 
 
   //---Save new rental to database
-  $scope.saveRental = function(user) {
+  $scope.saveRental = function (user) {
       $http.post('/rentals/save', user);
   };
 
 
   //---Check availability of day selected by user
-  $scope.checkAvailability = function(date) {
+  $scope.checkAvailability = function (date) {
     let rentals = $scope.rentals;
     $scope.dateTaken = false;
     $scope.booked = rentals.filter(function (rental) {
@@ -52,7 +52,7 @@ view2.controller('SaveRental', ['$scope', '$http', function($scope, $http) {
 
 
   // ---Check what times are booked on given day
-  let checkTimes = function(booked) {
+  let checkTimes = function (booked) {
     $scope.response = '';
     $scope.bookedTimes = '';
     if (booked.length > 0) {
@@ -67,36 +67,21 @@ view2.controller('SaveRental', ['$scope', '$http', function($scope, $http) {
   };
 
 
-  $scope.checkSubmit = function(time) {
+  $scope.checkSubmit = function (time) {
     $scope.timeErr = false;
+    $scope.cannotSubmit = true;
     let booked = $scope.booked
     for (var i = 0; i < booked.length; i++) {
-      if ($scope.start_rental.slice(0, 1) >= booked[i].start_rental.slice(0, 1)) {
-        return $scope.timeErr = true;
-      };
-      if ($scope.end_rental.slice(0, 1) <= booked[i].end_rental.slice(0, 1)) {
-        return $scope.timeErr = true;
-      };
+      let bookedStart = booked[i].start_rental.slice(0, 2);
+      let bookedEnd = booked[i].end_rental.slice(0, 2);
+      let userStart = $scope.user.start_rental;
+      let userEnd = $scope.user.end_rental;
+      console.log('bookedStart', bookedStart, 'bookedEnd', bookedEnd, 'userStart', userStart, 'userEnd', userEnd)
+      if (userStart <= bookedStart && userEnd <= bookedStart) {
+        return $scope.timeErr = false;
+      } else if (userStart >= bookedEnd && userEnd >= bookedEnd) {
+        return $scope.timeErr = false;
+      } else return $scope.timeErr = true;
     };
   }
 }]);
-
-// view2.directive('TimeSelect', ['$scope', function ($scope) {
-//     return {
-//       restrict: 'A',
-//       require: 'ngModel',
-//       link: function (scope, elm, attrs, ctrl) {
-//         ctrl.$parsers.unshift(function (viewValue) {
-//
-//           var timeTaken = scope[attrs.duplicate];
-//           if (scope.duplicate.indexOf(viewValue) !== -1) {
-//               ctrl.$setValidity('duplicate', false);
-//               return undefined;
-//           } else {
-//               ctrl.$setValidity('duplicate', true);
-//               return viewValue;
-//           }
-//         });
-//       }
-//     };
-// });
