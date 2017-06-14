@@ -61,22 +61,30 @@ view2.controller('SaveRental', ['$scope', '$http', function ($scope, $http) {
     $scope.timeErr = false;
     $scope.cannotSubmit = true;
     let booked = $scope.booked
-    for (var i = 0; i < booked.length; i++) {
-      console.log('type', typeof startRental)
-      console.log('type2', typeof endRental)
-      let bookedStart = booked[i].start_rental.slice(0, 2);
-      let bookedEnd = booked[i].end_rental.slice(0, 2);
-      let userStart = startRental.slice(0, 2);
-      let userEnd = endRental.slice(0, 2);
-      if (userStart <= bookedStart && userEnd <= bookedStart) {
-        $scope.timeErr = false;
-        $scope.cannotSubmit = false;
-        $scope.canSubmit = true;
-      } else if (userStart >= bookedEnd && userEnd >= bookedEnd) {
-        $scope.timeErr = false;
-        $scope.cannotSubmit = false;
-        $scope.canSubmit = true;
-      } else return $scope.timeErr = true;
-    };
+    if (booked.length > 0) {
+      for (var i = 0; i < booked.length; i++) {
+        console.log('type', typeof startRental)
+        console.log('type2', typeof endRental)
+        let bookedStart = booked[i].start_rental.slice(0, 2);
+        let bookedEnd = booked[i].end_rental.slice(0, 2);
+        let userStart = startRental.slice(0, 2);
+        let userEnd = endRental.slice(0, 2);
+        if (userStart <= bookedStart && userEnd <= bookedStart) {
+          $scope.timeErr = false;
+          $scope.cannotSubmit = false;
+          $scope.canSubmit = true;
+        } else if (userStart >= bookedEnd && userEnd >= bookedEnd) {
+          $scope.timeErr = false;
+          $scope.cannotSubmit = false;
+          $scope.canSubmit = true;
+        } else {
+          $scope.timeErr = true;
+        };
+      }
+    } else {
+      $scope.timeErr = false;
+      $scope.cannotSubmit = false;
+      $scope.canSubmit = true;
+    } 
   }
 }]);
