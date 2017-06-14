@@ -5,8 +5,7 @@ var view2 = angular.module('myApp.view2', ['ngRoute'])
 .config(['$routeProvider', function ($routeProvider) {
   $routeProvider.when('/view2', {
     templateUrl: 'view2/view2.html',
-    controller: 'SaveRental',
-    directive: 'checkStartTime'
+    controller: 'SaveRental'
   });
 }]);
 
@@ -14,8 +13,8 @@ view2.controller('SaveRental', ['$scope', '$http', function ($scope, $http) {
   $scope.user = {};
   $scope.dateTaken = false;
   $scope.bookedHrs = '';
-
-
+  $scope.cannotSubmit = true;
+  document.getElementById("no-submit").setAttribute('disabled','disabled')
   //---GET all rentals from database
   $http.get('/rentals').success(function (data) {
     $scope.rentals = data;
@@ -33,21 +32,12 @@ view2.controller('SaveRental', ['$scope', '$http', function ($scope, $http) {
     let rentals = $scope.rentals;
     $scope.dateTaken = false;
     $scope.booked = rentals.filter(function (rental) {
-      console.log('filter', rental.rental_date);
-      date = date.toISOString();
-      if (date === rental.rental_date) {
-        console.log('rental', rental.rental_date);
-        console.log('date', date);
-        console.log(true);
+      if (date.toISOString() === rental.rental_date) {
         return rental;
       }
-      console.log('rental', rental.rental_date);
-      console.log('date', date);
-      console.log(false);
       return false;
     });
-      console.log('booked', $scope.booked);
-      checkTimes($scope.booked)
+    checkTimes($scope.booked)
   };
 
 
@@ -67,20 +57,25 @@ view2.controller('SaveRental', ['$scope', '$http', function ($scope, $http) {
   };
 
 
-  $scope.checkSubmit = function (time) {
+  $scope.checkSubmit = function (startRental, endRental) {
     $scope.timeErr = false;
     $scope.cannotSubmit = true;
     let booked = $scope.booked
     for (var i = 0; i < booked.length; i++) {
+      console.log('type', typeof startRental)
+      console.log('type2', typeof endRental)
       let bookedStart = booked[i].start_rental.slice(0, 2);
       let bookedEnd = booked[i].end_rental.slice(0, 2);
-      let userStart = $scope.user.start_rental;
-      let userEnd = $scope.user.end_rental;
-      console.log('bookedStart', bookedStart, 'bookedEnd', bookedEnd, 'userStart', userStart, 'userEnd', userEnd)
+      let userStart = startRental.slice(0, 2);
+      let userEnd = endRental.slice(0, 2);
       if (userStart <= bookedStart && userEnd <= bookedStart) {
-        return $scope.timeErr = false;
+        $scope.timeErr = false;
+        $scope.cannotSubmit = false;
+        $scope.canSubmit = true;
       } else if (userStart >= bookedEnd && userEnd >= bookedEnd) {
-        return $scope.timeErr = false;
+        $scope.timeErr = false;
+        $scope.cannotSubmit = false;
+        $scope.canSubmit = true;
       } else return $scope.timeErr = true;
     };
   }

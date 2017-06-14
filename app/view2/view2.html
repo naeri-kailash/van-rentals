@@ -91,16 +91,18 @@
               </select>
             </label><br />
             <span style="color:red" ng-show="timeErr">This time coincides with an existing booking. Please change your time selection.</span>
+            <button type="button" ng-click="checkSubmit(user.start_rental, user.end_rental)" name="checktime"required="">Check Time</button><br />
 
-            <input type="button" value="Submit" />
+            <input class="no-submit" id="no-submit" ng-show="cannotSubmit" type="button" value="Submit" />
+            <div ng-show="canSubmit">
+              Great! This time is available. Make sure you have filled out the form correctly and click submit. We will get back to you to confirm your booking.
+            </div>
             <div ng-show="cannotSubmit">
               Complete form to submit
             </div>
             <input ng-show="canSubmit" type="submit" ng-disabled="myForm.$invalid" ng-click="saveRental(user)" value="Submit" />
           </form>
         </div>
-
-
       </div>
     </div>
     <div class="row">
