@@ -16,6 +16,7 @@ Phase 1 boilerplate project with:
 
 ```
 npm install
+bower install
 npm run knex migrate:latest
 npm run knex seed:run
 npm run dev
