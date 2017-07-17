@@ -1,3 +1,7 @@
+Van rental service web app.
+
+NodeJS Express and AngularJS
+
 # Boilerplate: Knex.js
 
 Phase 1 boilerplate project with:
