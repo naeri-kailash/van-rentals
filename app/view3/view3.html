@@ -1,31 +1,53 @@
 <div class="container">
   <div class="row" ng-controller="ViewRentals">
     <h1>Existing Rentals</h1>
-    <div ng-repeat="rental in rentals">
-      <div class="rental">
-        <h3>{{rental.first_name}} {{rental.last_name}}</h3>
-        <p>
-          Booking was made on: {{rental.created_at}}
-        </p>
-        <p>
-          Clients email: {{rental.email}}
-        </p>
-        <p>
-          Clients phone number: {{rental.phone_number}}
-        </p>
-        <p>
-          Start address: {{rental.address_1}}
-        </p>
-        <p>
-          End address: {{rental.address_2}}
-        </p>
-        <p>
-          Start time: {{rental.start_rental}}
-        </p>
-        <p>
-          End time: {{rental.end_rental}}
-        </p>
-      </div>
+    <div class="rental">
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Booking date</th>
+          <th>Start time</th>
+          <th>End time</th>
+          <th>Start Address</th>
+          <th>End Address</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Booking created</th>
+        </tr>
+        <tr ng-repeat="rental in rentals">
+          <th>{{rental.first_name}} {{rental.last_name}}</th>
+          <th>{{rental.rental_date}}</th>
+          <th>{{rental.start_rental}}</th>
+          <th>{{rental.end_rental}}</th>
+          <th>{{rental.address_1}}</th>
+          <th>{{rental.address_2}}</th>
+          <th>{{rental.email}}</th>
+          <th>{{rental.phone_number}}</th>
+          <th>{{rental.created_at}}</th>
+        </tr>
+      </table>
     </div>
   </div>
 </div>
+<!-- <h3>{{rental.first_name}} {{rental.last_name}}</h3>
+<p>
+  Booking was made on: {{rental.created_at}}
+</p>
+<p>
+  Clients email: {{rental.email}}
+</p>
+<p>
+  Clients phone number: {{rental.phone_number}}
+</p>
+<p>
+  Start address: {{rental.address_1}}
+</p>
+<p>
+  End address: {{rental.address_2}}
+</p>
+<p>
+  Start time: {{rental.start_rental}}
+</p>
+<p>
+  End time: {{rental.end_rental}}
+</p> -->
