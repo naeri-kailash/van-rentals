@@ -14,5 +14,5 @@ view3.controller('ViewRentals', ['$scope', '$http', function ($scope, $http) {
     $scope.rentals = data;
   });
 
-  
+
 }]);
